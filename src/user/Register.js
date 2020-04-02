@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import App from "../App";
+import Displaydata from "./Displaydata";
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formDetails: {
-        fullName: "",
-        gender: "",
-        course: "",
-        checkb: ""
-      }
+      fullName: "",
+      gender: "",
+      course: "",
+      checkb: "",
+      showalert: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ showalert: true });
     const data = this.state;
     //alert("The Data Given: " + data);
     console.log("final data is", data);
@@ -28,6 +31,7 @@ class Register extends Component {
 
   render() {
     const { fullName } = this.state;
+
     return (
       <div>
         <h1>Form Elements</h1>
@@ -89,6 +93,7 @@ class Register extends Component {
             <button>Display All</button>
           </p>
         </form>
+        {this.state.showalert && <Displaydata parentstate={this.state} />}
       </div>
     );
   }
